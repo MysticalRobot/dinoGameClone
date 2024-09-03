@@ -1,0 +1,83 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname |Runner Game|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; A Block is one of:
+; - "long"
+; - "medium"
+; - "short"
+; - "flying" 
+
+; A Obstacle is (make-obstacle Block Posn)
+(define-struct obstacle [block location])
+
+; I only want it to generate one when the player
+; is 2 score behind the total number of obstacles
+
+; A Player is (make-player Posn X-Velocity Y-Velocity Boolean)
+(define-struct player [location x-vel y-vel ducking?]) 
+                       
+; A World is (make-world Player [ListOf Obstacle] NaturalNumber)
+(define-struct world [player terrain score])
+; there should always be two more obstacles than the player's score
+(define initial-world (make-world (make-player (make-posn 10 10) 15 0 false)
+                                  (list (make-obstacle "short" 20)
+                                        (make-obstacle "long" 35)) 0))
+
+
+; generate-terrain : NaturalNumber Terrain -> Terrain
+; builds new terrain onto old terrain based on current score
+; *Accumulator*: t is the built upon terrain
+(define (generate-terrain n t)
+  (local [(define desired-length (+ (cond
+                                      [(< n 10) 2]
+                                      [else (+ (quotient n 15) 2)])
+                                    (length t)))]
+  (cond [(= desired-length (length t)) t]
+        [(and (> n 10) (= (random 4) 3))
+         (generate-terrain
+          (add1 n)
+          (cons (make-obstacle "flying"
+                               (make-posn (+ (posn-x (obstacle-location (first t)))
+                                             (random 16)) 25)) t))]
+        [else
+         (generate-terrain
+          (add1 n)
+          (cons (make-obstacle (list-ref (list "large" "medium" "small")
+                                         (random 3))
+                               (make-posn (+ (posn-x (obstacle-location (first t)))
+                                             (random 16)) 10)) t))])))
+
+; move-player : Player -> Players
+; moves player in the right direction
+(define (move-player p)
+  (make-player (make-posn (+ 2 (posn-x (player-location p)))
+                          (posn-y (player-location p)))
+               (cond [(> 10 (posn-y (player-location p)))]
+                     [])
+; generate : World -> World
+; adds obstacles to terrain based on score (speed)
+(make-world (world-player w)
+            (generate-terrain (world-score w)
+                              (world-terrain w))
+            (world-score w))
+
+; run-player : Player -> Player
+; run-terrain : Terrain -> Terrain
+
+; move : 
+; draw-player :
+; draw-terrain :
+; draw :
+; collision? :
+; score :
+; score/a :
+
+#;(big-bang initial-world
+  [to-draw draw]
+  [on-key move]
+  [on-tick run]
+  [on-tick generate 2]
+  [display-mode "fullscreen"])
+
+
+                           
