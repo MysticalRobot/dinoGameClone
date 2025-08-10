@@ -1,6 +1,6 @@
 ## how to run
 
-- download racket and either:
+- download [Racket](https://racket-lang.org/download/) and either:
     - open and run `Runner Game.rkt` in DrRacket
     - add Racket to your path and run `racket Runner\ Game.rkt`
 - enjoy!
