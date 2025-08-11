@@ -20,4 +20,6 @@ dodge obstacles as you run
 - use space or the up arrow key to jump
 - use the down arrow key to duck
 
+---
+
 test driven development was drilled into me in C211, but unfortunately I got lost in the sauce and failed to test
