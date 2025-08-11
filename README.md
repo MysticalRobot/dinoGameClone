@@ -1,3 +1,7 @@
+dodge obstacles as you run
+
+![dino game clone preview](./preview.gif)
+
 ## how to run
 
 - download [Racket](https://racket-lang.org/download/) and either:
@@ -11,6 +15,4 @@
 - use space or the up arrow key to jump
 - use the down arrow key to duck
 
-## technical features
-
-- test driven development was drilled into me in C211, but unfortunately I got lost in the sauce and failed to test
+test driven development was drilled into me in C211, but unfortunately I got lost in the sauce and failed to test
