@@ -1,3 +1,5 @@
+# Dino Game Clone
+
 dodge obstacles as you run
 
 ![dino game clone preview](./preview.gif)
