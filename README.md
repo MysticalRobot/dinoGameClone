@@ -8,7 +8,7 @@ dodge obstacles as you run
 
 - download [Racket](https://racket-lang.org/download/) and either:
     - open and run `Runner Game.rkt` in DrRacket
-    - add Racket to your path and run `racket Runner\ Game.rkt`
+    - add Racket to your path and run ```racket Runner\ Game.rkt```
 - enjoy!
 
 ## how to play
